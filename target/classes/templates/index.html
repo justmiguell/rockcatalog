@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Rock Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <div>
+            <div class="brand">ROCK<span>CATALOG</span></div>
+            <div class="tagline">bandas, discos e notas de quem realmente ouve</div>
+        </div>
+        <a class="nav-add" th:href="@{/bandas/novo}">+ nova banda</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="flash" th:if="${mensagem}" th:text="${mensagem}"></div>
+
+    <div th:if="${#lists.isEmpty(bandas)}" class="empty-state">
+        o catalogo ainda esta vazio.<br>
+        <a th:href="@{/bandas/novo}" style="color: var(--gold);">cadastre a primeira banda &rarr;</a>
+    </div>
+
+    <div th:each="banda : ${bandas}" class="flyer-card band-card">
+        <div>
+            <h2><a th:href="@{'/bandas/' + ${banda.id}}" th:text="${banda.nome}"></a></h2>
+            <div class="band-genero" th:text="${banda.genero}"></div>
+        </div>
+        <div class="arrow">&rarr;</div>
+    </div>
+
+</div>
+
+<div class="footer">feito com distorção e java</div>
+
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${album.titulo} + ' — Rock Catalog'">Album — Rock Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <div class="brand">ROCK<span>CATALOG</span></div>
+        <a class="nav-add" th:href="@{'/bandas/' + ${album.banda.id}}">&larr; voltar</a>
+    </div>
+</header>
+
+<div class="container" th:with="filled=${T(java.lang.Math).round(album.notaMedia / 2.0)}">
+
+    <div class="flyer-card album-header">
+        <div>
+            <h1 class="page-title" style="margin-top:0" th:text="${album.titulo}"></h1>
+            <p class="page-sub" th:text="${album.banda.nome} + ' · ' + ${album.anoLancamento}"></p>
+
+            <div class="rating-marks" style="font-size:1.4rem;">
+                <th:block th:each="i : ${#numbers.sequence(1,5)}">
+                    <span th:classappend="${i <= filled} ? '' : 'off'" th:text="${i <= filled} ? '✕' : '·'"></span>
+                </th:block>
+            </div>
+        </div>
+        <div class="media-box">
+            <div class="media-numero" th:text="${album.notaMedia}"></div>
+            <div class="media-label" th:text="'de 10 · ' + ${album.totalAvaliacoes} + ' avaliacao(oes)'"></div>
+        </div>
+    </div>
+
+    <form th:action="@{'/albuns/' + ${album.id} + '/excluir'}" method="post"
+          onsubmit="return confirm('Remover este album e todas as suas avaliacoes?');">
+        <button type="submit" class="btn btn-danger">remover album</button>
+    </form>
+
+    <div class="section-label">deixe sua avaliacao</div>
+
+    <div class="flyer-card">
+        <form class="stacked" th:action="@{'/albuns/' + ${album.id} + '/avaliacoes'}" th:object="${novaAvaliacao}" method="post">
+
+            <div>
+                <label for="autor">Seu nome (ou apelido)</label>
+                <input type="text" id="autor" th:field="*{autor}" placeholder="ex: fantasma_do_emo">
+                <div class="field-error" th:if="${#fields.hasErrors('autor')}" th:errors="*{autor}"></div>
+            </div>
+
+            <div>
+                <label for="nota">Nota (0 a 10)</label>
+                <input type="number" id="nota" step="0.1" min="0" max="10" th:field="*{nota}">
+                <div class="field-error" th:if="${#fields.hasErrors('nota')}" th:errors="*{nota}"></div>
+            </div>
+
+            <div>
+                <label for="comentario">Comentario</label>
+                <textarea id="comentario" th:field="*{comentario}" placeholder="o que voce achou desse album?"></textarea>
+                <div class="field-error" th:if="${#fields.hasErrors('comentario')}" th:errors="*{comentario}"></div>
+            </div>
+
+            <button type="submit" class="btn">Publicar avaliacao</button>
+        </form>
+    </div>
+
+    <div class="section-label">avaliacoes de quem ja ouviu</div>
+
+    <div class="flyer-card" th:if="${#lists.isEmpty(album.avaliacoes)}">
+        <p class="empty-state" style="border:none; padding:20px 0;">ninguem avaliou esse album ainda. seja o primeiro.</p>
+    </div>
+
+    <div class="flyer-card" th:unless="${#lists.isEmpty(album.avaliacoes)}">
+        <div class="avaliacao" th:each="a : ${album.avaliacoes}">
+            <div class="avaliacao-topo">
+                <span class="avaliacao-autor" th:text="${a.autor}"></span>
+                <span th:text="${a.nota} + '/10 · ' + ${#temporals.format(a.data, 'dd/MM/yyyy')}"></span>
+            </div>
+            <p class="avaliacao-texto" th:text="${a.comentario}"></p>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">feito com distorção e java</div>
+
+</body>
+</html>

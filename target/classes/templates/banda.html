@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${banda.nome} + ' — Rock Catalog'">Banda — Rock Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <div class="brand">ROCK<span>CATALOG</span></div>
+        <a class="nav-add" th:href="@{/}">&larr; voltar</a>
+    </div>
+</header>
+
+<div class="container">
+
+    <div class="flash" th:if="${mensagem}" th:text="${mensagem}"></div>
+
+    <h1 class="page-title" th:text="${banda.nome}"></h1>
+    <p class="page-sub" th:text="${banda.genero}"></p>
+
+    <form th:action="@{'/bandas/' + ${banda.id} + '/excluir'}" method="post"
+          onsubmit="return confirm('Remover esta banda e todos os seus albuns e avaliacoes?');">
+        <button type="submit" class="btn btn-danger">remover banda</button>
+    </form>
+
+    <div class="section-label">
+        albuns
+        <a th:href="@{'/bandas/' + ${banda.id} + '/albuns/novo'}" style="float:right; color: var(--gold);">+ novo album</a>
+    </div>
+
+    <div th:if="${#lists.isEmpty(banda.albuns)}" class="empty-state">
+        nenhum album cadastrado ainda.
+    </div>
+
+    <div th:each="album : ${banda.albuns}" class="flyer-card album-card">
+        <div>
+            <h3><a th:href="@{'/albuns/' + ${album.id}}" th:text="${album.titulo}"></a></h3>
+            <div class="album-meta">
+                <span th:text="${album.anoLancamento}"></span>
+                &middot;
+                <span th:text="${album.totalAvaliacoes} + ' avaliacao(oes)'"></span>
+            </div>
+        </div>
+        <div class="rating">
+            <div class="rating-number" th:text="${album.notaMedia} + ' / 10'"></div>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer">feito com distorção e java</div>
+
+</body>
+</html>

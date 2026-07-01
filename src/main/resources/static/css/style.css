@@ -1,0 +1,444 @@
+/* =========================================================
+   ROCK CATALOG — tema "flyer de show xerocado"
+   Paleta escura + blackletter + cartoes com borda rasgada
+   ========================================================= */
+
+:root {
+  --bg: #0d0a0f;
+  --paper: #17111c;
+  --paper-alt: #1f1724;
+  --ink: #ede6e0;
+  --muted: #9483a3;
+  --blood: #7a1420;
+  --blood-bright: #a3202f;
+  --violet: #5b3a72;
+  --gold: #a68a5b;
+  --line: #34293d;
+
+  --font-display: "Pirata One", "UnifrakturMaguntia", serif;
+  --font-body: "EB Garamond", Georgia, serif;
+  --font-mono: "Space Mono", "Courier New", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  background-image:
+    radial-gradient(circle at 15% 10%, rgba(122, 20, 32, 0.12), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(91, 58, 114, 0.14), transparent 45%);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 18px;
+  line-height: 1.55;
+}
+
+a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.container {
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ---------- Cabecalho / topo de flyer ---------- */
+
+.topbar {
+  border-bottom: 1px dashed var(--line);
+  padding: 28px 24px 20px;
+  margin-bottom: 12px;
+}
+
+.topbar-inner {
+  max-width: 880px;
+  margin: 0 auto;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--ink);
+  letter-spacing: 1px;
+  text-shadow: 0 0 18px rgba(163, 32, 47, 0.45);
+}
+
+.brand span {
+  color: var(--blood-bright);
+}
+
+.tagline {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.nav-add {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 8px 14px;
+  border-radius: 2px;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.nav-add:hover {
+  background-color: var(--gold);
+  color: var(--bg);
+}
+
+/* ---------- Flash message ---------- */
+
+.flash {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  background: var(--paper-alt);
+  border-left: 3px solid var(--violet);
+  padding: 10px 16px;
+  margin: 20px 0;
+  color: var(--ink);
+}
+
+/* ---------- Cartao estilo flyer rasgado ---------- */
+
+.flyer-card {
+  position: relative;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  padding: 22px 24px;
+  margin-bottom: 22px;
+  clip-path: polygon(
+    0% 2%, 3% 0%, 97% 0%, 100% 3%,
+    100% 97%, 97% 100%, 3% 100%, 0% 98%
+  );
+}
+
+.flyer-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: repeating-linear-gradient(
+    115deg,
+    rgba(255, 255, 255, 0.015) 0px,
+    rgba(255, 255, 255, 0.015) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+}
+
+.band-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.band-card h2 {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  margin: 0 0 4px;
+  color: var(--ink);
+}
+
+.band-genero {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.arrow {
+  font-family: var(--font-mono);
+  color: var(--blood-bright);
+  font-size: 1.3rem;
+}
+
+.empty-state {
+  font-family: var(--font-mono);
+  color: var(--muted);
+  text-align: center;
+  padding: 60px 20px;
+  border: 1px dashed var(--line);
+}
+
+/* ---------- Pagina de banda ---------- */
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  margin: 30px 0 4px;
+  color: var(--ink);
+}
+
+.page-sub {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-bottom: 1px dashed var(--line);
+  padding-bottom: 8px;
+  margin: 34px 0 16px;
+}
+
+.album-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.album-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  margin: 0 0 4px;
+}
+
+.album-meta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+/* ---------- Rating estilo canhoto de ingresso (marcas em X) ---------- */
+
+.rating {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.rating-marks {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 2px;
+  color: var(--blood-bright);
+}
+
+.rating-marks .off {
+  color: var(--line);
+}
+
+.rating-number {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+/* ---------- Formularios ---------- */
+
+form.stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+  display: block;
+}
+
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  background: var(--paper-alt);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  padding: 10px 12px;
+  border-radius: 2px;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+input:focus,
+textarea:focus {
+  outline: 2px solid var(--blood-bright);
+  outline-offset: 1px;
+}
+
+.field-error {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--blood-bright);
+}
+
+.btn {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  background: var(--blood);
+  color: var(--ink);
+  border: none;
+  padding: 12px 22px;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.btn:hover {
+  background: var(--blood-bright);
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1px solid var(--line);
+  color: var(--muted);
+}
+
+.btn-ghost:hover {
+  border-color: var(--blood-bright);
+  color: var(--ink);
+  background: transparent;
+}
+
+.btn-danger {
+  background: transparent;
+  border: 1px solid var(--blood);
+  color: var(--blood-bright);
+}
+
+.btn-danger:hover {
+  background: var(--blood);
+  color: var(--ink);
+}
+
+/* ---------- Avaliacoes publicas ---------- */
+
+.avaliacao {
+  border-bottom: 1px dashed var(--line);
+  padding: 16px 0;
+}
+
+.avaliacao:last-child {
+  border-bottom: none;
+}
+
+.avaliacao-topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.avaliacao-autor {
+  color: var(--gold);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.avaliacao-texto {
+  color: var(--ink);
+}
+
+.album-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.media-box {
+  text-align: center;
+  font-family: var(--font-mono);
+}
+
+.media-numero {
+  font-size: 2.6rem;
+  color: var(--blood-bright);
+  line-height: 1;
+}
+
+.media-label {
+  font-size: 0.65rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ---------- Rodape ---------- */
+
+.footer {
+  text-align: center;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--line);
+  margin-top: 60px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 600px) {
+  .brand {
+    font-size: 1.9rem;
+  }
+  .flyer-card {
+    padding: 18px;
+  }
+  .band-card,
+  .album-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .rating {
+    align-items: flex-start;
+  }
+}
+
+/* ---------- Acessibilidade: foco visivel e reduced motion ---------- */
+
+a:focus-visible,
+button:focus-visible,
+.nav-add:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Novo album — Rock Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <div class="brand">ROCK<span>CATALOG</span></div>
+        <a class="nav-add" th:href="@{'/bandas/' + ${banda.id}}">&larr; voltar</a>
+    </div>
+</header>
+
+<div class="container">
+    <h1 class="page-title">Novo album</h1>
+    <p class="page-sub" th:text="${banda.nome}"></p>
+
+    <div class="flyer-card">
+        <form class="stacked" th:action="@{'/bandas/' + ${banda.id} + '/albuns'}" th:object="${album}" method="post">
+
+            <div>
+                <label for="titulo">Titulo do album</label>
+                <input type="text" id="titulo" th:field="*{titulo}" placeholder="ex: The Black Parade">
+                <div class="field-error" th:if="${#fields.hasErrors('titulo')}" th:errors="*{titulo}"></div>
+            </div>
+
+            <div>
+                <label for="anoLancamento">Ano de lancamento</label>
+                <input type="number" id="anoLancamento" th:field="*{anoLancamento}" placeholder="ex: 2006">
+            </div>
+
+            <div>
+                <label for="capaUrl">Capa (URL, opcional)</label>
+                <input type="text" id="capaUrl" th:field="*{capaUrl}" placeholder="https://...">
+            </div>
+
+            <button type="submit" class="btn">Salvar album</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>

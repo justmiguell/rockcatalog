@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nova banda — Rock Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=EB+Garamond:ital,wght@0,400;0,600;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="topbar">
+    <div class="topbar-inner">
+        <div class="brand">ROCK<span>CATALOG</span></div>
+        <a class="nav-add" th:href="@{/}">&larr; voltar</a>
+    </div>
+</header>
+
+<div class="container">
+    <h1 class="page-title">Nova banda</h1>
+    <p class="page-sub">adicione uma banda ao catalogo</p>
+
+    <div class="flyer-card">
+        <form class="stacked" th:action="@{/bandas}" th:object="${banda}" method="post">
+
+            <div>
+                <label for="nome">Nome da banda</label>
+                <input type="text" id="nome" th:field="*{nome}" placeholder="ex: My Chemical Romance">
+                <div class="field-error" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+            </div>
+
+            <div>
+                <label for="genero">Genero</label>
+                <input type="text" id="genero" th:field="*{genero}" placeholder="ex: Emo, Post-Hardcore, Rock Alternativo">
+                <div class="field-error" th:if="${#fields.hasErrors('genero')}" th:errors="*{genero}"></div>
+            </div>
+
+            <div>
+                <label for="imagemUrl">Imagem (URL, opcional)</label>
+                <input type="text" id="imagemUrl" th:field="*{imagemUrl}" placeholder="https://...">
+            </div>
+
+            <button type="submit" class="btn">Salvar banda</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
