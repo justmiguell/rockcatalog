@@ -1,4 +1,4 @@
-# Rock Catalog 🖤
+# Deadwax🖤
 
 Projeto pessoal pra treinar Java com Spring Boot, misturando com uma coisa
 que eu curto de verdade: rock e emo. É um catálogo de bandas e álbuns onde
